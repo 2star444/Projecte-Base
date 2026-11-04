@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<title>Compte</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700">
+<link rel="stylesheet" href="css/estils.css">
+<script src="js/dades.js"></script>
+<script src="js/app.js"></script>
+</head>
+<body>
+<div class="capcalera">
+  <a href="index.html"><img src="img/logo.svg" alt="Biblioteca Digital del Turó"></a>
+  <div class="hamburguesa" id="obrir-menu">☰</div>
+</div>
+<nav class="menu" id="menu">
+  <ul>
+    <li><a href="perfil.html">El meu espai</a></li>
+    <li><a href="index.html">Inici</a></li>
+    <li><a href="cataleg.html">Fons</a></li>
+  </ul>
+</nav>
+<main>
+  <h1>Hola, usuari/ària</h1>
+  <h2>Préstecs actius</h2>
+  <table class="dades">
+    <tr><th>Document</th><th>Venciment</th><th>Pròrrogues</th></tr>
+    <tr><td>BD-0006</td><td>14/11</td><td>0/2</td></tr>
+    <tr><td>BD-0010</td><td>21/11</td><td>1/2</td></tr>
+  </table>
+  <h2>Historial</h2>
+  <table class="dades">
+    <tr><th>Document</th><th>Data</th></tr>
+    <tr><td>BD-0003</td><td>02/10</td></tr>
+    <tr><td>BD-0001</td><td>11/09</td></tr>
+    <tr><td>BD-0007</td><td>28/07</td></tr>
+  </table>
+  <details>
+    <summary>Altres opcions</summary>
+    <div class="preferencies">
+      <h3>Preferències de lectura</h3>
+      <label><input type="checkbox" id="pref-lletra"> Lletra gran</label>
+      <label><input type="checkbox" id="pref-contrast"> Contrast alt</label>
+      <label><input type="checkbox" id="pref-fosc"> Mode fosc</label>
+      <button type="button" id="aplicar-preferencies">D'acord</button>
+    </div>
+  </details>
+</main>
+<footer>
+  <center>Biblioteca Digital del Turó · Plaça de la Lectura, 1 · 08000 El Turó</center>
+</footer>
+</body>
+</html>

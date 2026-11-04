@@ -1,0 +1,81 @@
+/* Biblioteca Digital del Turó - full d'estils */
+:root{
+  --tinta:#1D2327; --paper:#FAFAF7; --verd:#0F4C5C; --ocre:#E3A72F; --gris:#9AA3A8; --linia:#DDE2E4;
+}
+*{box-sizing:border-box}
+*:focus{outline:none}
+html{font-size:15px}
+body{margin:0;font-family:"Merriweather",Georgia,serif;color:var(--tinta);background:var(--paper);line-height:1.5}
+a{color:var(--verd)}
+::-webkit-scrollbar{width:14px;background:#e9ecec}
+::-webkit-scrollbar-thumb{background:var(--verd);border-radius:7px}
+
+/* capçalera */
+.capcalera{background:var(--verd);color:var(--paper);display:flex;align-items:center;justify-content:space-between;padding:10px 24px}
+.capcalera img{display:block}
+.hamburguesa{font-size:26px;cursor:pointer;padding:2px 8px;user-select:none}
+.menu{display:none;background:#0b3a46;padding:6px 24px}
+.menu.obert{display:block}
+.menu ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;flex-wrap:wrap}
+.menu a{color:var(--paper);text-decoration:none;font-size:12px;padding:2px 6px;font-family:Arial,sans-serif}
+.menu a:hover{text-decoration:underline}
+.ajuda-cap{color:var(--paper);font-family:Arial,sans-serif;font-size:12px}
+.noticies{background:var(--ocre);color:var(--tinta);font-family:Arial,sans-serif;font-size:13px;padding:4px 0}
+
+/* contingut */
+main{max-width:1100px;margin:0 auto;padding:24px}
+h1,h2,h3{font-weight:700;line-height:1.25}
+h1{font-size:1.9rem;margin:.2em 0 .6em}
+h2{font-size:1.35rem}
+.hero{position:relative;border-radius:6px;overflow:hidden;margin-bottom:28px}
+.hero img{width:100%;display:block}
+.hero .text{position:absolute;left:32px;bottom:28px;color:#fff;max-width:520px}
+.hero .text h1{font-size:2.4rem;margin:0 0 12px}
+.btn-gran{display:inline-block;background:var(--ocre);color:var(--tinta);font-family:Arial,sans-serif;font-weight:700;font-size:1.15rem;padding:16px 34px;border-radius:40px;border:0;cursor:pointer;text-decoration:none}
+.enllac-discret{color:var(--gris);font-family:Arial,sans-serif;font-size:.8rem;text-decoration:none}
+.cerca-inici{display:flex;gap:6px;margin:10px 0 28px}
+.cerca-inici input{flex:1;max-width:420px;padding:9px 12px;border:1px solid var(--linia);border-radius:4px;font-size:1rem}
+.cerca-inici button{padding:9px 14px;border:1px solid var(--linia);background:#fff;border-radius:4px;font-size:.85rem}
+
+/* graella de llibres */
+.graella{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:22px}
+.targeta{background:#fff;border:1px solid var(--linia);border-radius:6px;padding:12px;cursor:pointer;transition:transform .2s}
+.targeta:hover{transform:translateY(-3px)}
+.targeta img{width:100%;-webkit-box-reflect:below 2px linear-gradient(transparent 85%, rgba(0,0,0,.25))}
+.targeta h3{font-size:1rem;margin:10px 0 2px}
+.targeta p{margin:0;color:#5c6468;font-family:Arial,sans-serif;font-size:.85rem}
+.paginacio{margin:26px 0;font-family:Arial,sans-serif}
+.paginacio span{display:inline-block;padding:2px 7px;cursor:pointer;color:var(--verd)}
+.paginacio span.actual{font-weight:700}
+.filtres{font-family:Arial,sans-serif;font-size:.9rem;margin-bottom:18px}
+
+/* fitxa */
+.fitxa{display:grid;grid-template-columns:320px 1fr;gap:34px}
+.fitxa img{width:100%;border-radius:4px}
+.punt{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:middle}
+.punt.si{background:#2e9e44}.punt.no{background:#d33b2c}
+.estrelles{color:#E3A72F;font-size:1.2rem}
+.btn-compartir{display:inline-block;background:#3b5998;color:#fff;font-family:Arial,sans-serif;font-weight:700;padding:14px 28px;border-radius:6px;margin-right:10px;border:0;font-size:1rem}
+.btn-desitjos{background:#E3A72F;color:#1D2327}
+.codi{font-family:Arial,sans-serif;font-size:.72rem;color:var(--gris)}
+
+/* reserva */
+.pas{display:none;background:#fff;border:1px solid var(--linia);border-radius:6px;padding:22px;max-width:560px}
+.pas.visible{display:block}
+.pas label{display:block;font-family:Arial,sans-serif;font-size:.9rem;margin:12px 0 4px}
+.pas input[type=text],.pas input[type=password],.pas input[type=date],.pas select{width:100%;padding:8px;border:1px solid var(--linia);border-radius:4px;font-size:1rem}
+.pas button{margin-top:18px;background:var(--verd);color:#fff;border:0;padding:10px 18px;border-radius:4px;font-size:.95rem}
+.condicions{height:140px;overflow:auto;border:1px solid var(--linia);padding:10px;font-size:.8rem;font-family:Arial,sans-serif}
+
+/* perfil */
+table.dades{border-collapse:collapse;width:100%;font-family:Arial,sans-serif;font-size:.9rem}
+table.dades td,table.dades th{border-bottom:1px solid var(--linia);padding:8px;text-align:left}
+details{margin-top:40px;font-family:Arial,sans-serif;font-size:.85rem;color:#5c6468}
+.preferencies label{display:block;margin:8px 0}
+.preferencies button{font-size:.75rem;padding:2px 8px}
+body.lletra-gran{font-size:1.25rem}
+body.contrast{background:#000;color:#fff}
+body.fosc{background:#1b1f22;color:#e8e8e8}
+
+/* peu */
+footer{background:#e9ecec;padding:24px;font-family:Arial,sans-serif;font-size:.8rem;color:#5c6468;margin-top:40px}

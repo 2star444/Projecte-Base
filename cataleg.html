@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OPAC</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700">
+<link rel="stylesheet" href="css/estils.css">
+<script src="js/dades.js"></script>
+<script src="js/app.js"></script>
+</head>
+<body>
+<div class="capcalera">
+  <a href="index.html"><img src="img/logo.svg" alt="Biblioteca Digital del Turó"></a>
+  <a class="ajuda-cap" href="ajuda.html">Necessites ajuda?</a>
+  <div class="hamburguesa" id="obrir-menu">☰</div>
+</div>
+<nav class="menu" id="menu">
+  <ul>
+    <li><a href="cataleg.html">Catàleg</a></li>
+    <li><a href="index.html">Inici</a></li>
+    <li><a href="ajuda.html">Serveis</a></li>
+    <li><a href="perfil.html">Compte</a></li>
+    <li><a href="perfil.html">Circulació</a></li>
+  </ul>
+</nav>
+
+<main>
+  <h1>Consulta OPAC</h1>
+  <form id="form-opac" class="cerca-inici">
+    <input id="cerca-opac" type="text" placeholder="Títol exacte">
+    <button>Executar consulta</button>
+  </form>
+  <div class="filtres">
+    Tipus de registre:
+    <select><option>Tots</option><option>Monografies</option><option>Publicacions en sèrie</option><option>Material no llibre</option></select>
+  </div>
+  <div class="graella" id="resultats"></div>
+  <div class="paginacio" id="paginacio"></div>
+</main>
+
+<footer>
+  <center>Biblioteca Digital del Turó · Plaça de la Lectura, 1 · 08000 El Turó</center>
+</footer>
+</body>
+</html>

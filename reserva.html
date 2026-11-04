@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Circulació</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700">
+<link rel="stylesheet" href="css/estils.css">
+<script src="js/dades.js"></script>
+<script src="js/app.js"></script>
+</head>
+<body>
+<div class="capcalera">
+  <a href="index.html"><img src="img/logo.svg" alt="Biblioteca Digital del Turó"></a>
+  <div class="hamburguesa" id="obrir-menu">☰</div>
+</div>
+<nav class="menu" id="menu">
+  <ul>
+    <li><a href="index.html">Inici</a></li>
+    <li><a href="cataleg.html">OPAC</a></li>
+    <li><a href="perfil.html">El meu espai</a></li>
+  </ul>
+</nav>
+<main>
+  <h1>Sol·licitud de préstec</h1>
+  <form id="form-reserva">
+    <div class="pas" id="pas1">
+      <h2>Identificació</h2>
+      <input type="text" id="carnet" placeholder="Núm. d'usuari">
+      <input type="password" id="pin" placeholder="PIN">
+      <button type="button" id="continuar-1">Continuar</button>
+    </div>
+    <div class="pas" id="pas2">
+      <h2>Document</h2>
+      <label for="document">Codi del document</label>
+      <input type="text" id="document">
+      <button type="button" id="continuar-2">Continuar</button>
+    </div>
+    <div class="pas" id="pas3">
+      <h2>Punt de servei</h2>
+      <label for="biblioteca">Punt de recollida</label>
+      <select id="biblioteca"></select>
+      <button type="button" id="continuar-3">Continuar</button>
+    </div>
+    <div class="pas" id="pas4">
+      <h2>Data</h2>
+      <label for="data">Data de recollida</label>
+      <input type="date" id="data">
+      <label><input type="radio" name="franja" checked> Matí</label>
+      <label><input type="radio" name="franja"> Tarda</label>
+      <button type="button" id="continuar-4">Continuar</button>
+    </div>
+    <div class="pas" id="pas5">
+      <h2>Condicions</h2>
+      <div class="condicions">
+        <p>1. La sol·licitud de préstec queda subjecta a la disponibilitat efectiva del document en el moment de la tramitació i a la normativa general de circulació de la Xarxa.</p>
+        <p>2. El document romandrà a disposició de la persona usuària durant un termini de cinc dies hàbils a comptar de la data indicada. Transcorregut aquest termini sense recollida, la sol·licitud es considerarà anul·lada i s'aplicaran els punts de penalització corresponents.</p>
+        <p>3. La persona usuària és responsable de la custòdia del document i n'haurà de respondre en cas de pèrdua o deteriorament.</p>
+        <p>4. Les dades personals es tracten d'acord amb la política de privacitat publicada a la seu electrònica.</p>
+      </div>
+      <label><input type="checkbox" id="accepto"> Accepto</label>
+      <button type="button" id="continuar-5">Continuar</button>
+    </div>
+    <div class="pas" id="pas6">
+      <h2>Resum</h2>
+      <p id="resum"></p>
+      <button type="button" id="processar">Processar</button>
+    </div>
+  </form>
+</main>
+<footer>
+  <center>Biblioteca Digital del Turó · Plaça de la Lectura, 1 · 08000 El Turó</center>
+</footer>
+</body>
+</html>
