@@ -39,66 +39,86 @@
       </ul>
     </nav>
     <main>
-      <h1>Sol·licitud de préstec</h1>
-      <form id="form-reserva">
-        <div class="pas" id="pas1">
-          <h2>Identificació</h2>
-          <input type="text" id="carnet" placeholder="Núm. d'usuari" />
-          <input type="password" id="pin" placeholder="PIN" />
-          <button type="button" id="continuar-1">Continuar</button>
-        </div>
-        <div class="pas" id="pas2">
-          <h2>Document</h2>
-          <label for="document">Codi del document</label>
-          <input type="text" id="document" />
-          <button type="button" id="continuar-2">Continuar</button>
-        </div>
-        <div class="pas" id="pas3">
-          <h2>Punt de servei</h2>
-          <label for="biblioteca">Punt de recollida</label>
-          <select id="biblioteca"></select>
-          <button type="button" id="continuar-3">Continuar</button>
-        </div>
-        <div class="pas" id="pas4">
-          <h2>Data</h2>
-          <label for="data">Data de recollida</label>
-          <input type="date" id="data" />
-          <label><input type="radio" name="franja" checked /> Matí</label>
-          <label><input type="radio" name="franja" /> Tarda</label>
-          <button type="button" id="continuar-4">Continuar</button>
-        </div>
-        <div class="pas" id="pas5">
-          <h2>Condicions</h2>
-          <div class="condicions">
-            <p>
-              1. La sol·licitud de préstec queda subjecta a la disponibilitat
-              efectiva del document en el moment de la tramitació i a la
-              normativa general de circulació de la Xarxa.
-            </p>
-            <p>
-              2. El document romandrà a disposició de la persona usuària durant
-              un termini de cinc dies hàbils a comptar de la data indicada.
-              Transcorregut aquest termini sense recollida, la sol·licitud es
-              considerarà anul·lada i s'aplicaran els punts de penalització
-              corresponents.
-            </p>
-            <p>
-              3. La persona usuària és responsable de la custòdia del document i
-              n'haurà de respondre en cas de pèrdua o deteriorament.
-            </p>
-            <p>
-              4. Les dades personals es tracten d'acord amb la política de
-              privacitat publicada a la seu electrònica.
-            </p>
-          </div>
-          <label><input type="checkbox" id="accepto" /> Accepto</label>
-          <button type="button" id="continuar-5">Continuar</button>
-        </div>
-        <div class="pas" id="pas6">
-          <h2>Resum</h2>
-          <p id="resum"></p>
-          <button type="button" id="processar">Processar</button>
-        </div>
+      <h1>Reserva un llibre</h1>
+      <p class="llibre-triat">Llibre: <strong id="llibre-reserva">—</strong></p>
+
+      <form class="form-reserva" action="confirmacio.html" method="get">
+        <input type="hidden" id="document" name="document" />
+
+        <label for="carnet">Número del carnet de la biblioteca</label>
+        <p class="ajuda" id="ajuda-carnet">
+          14 xifres, sense espais. El trobareu al dors del carnet.
+        </p>
+        <input
+          type="text"
+          id="carnet"
+          required
+          inputmode="numeric"
+          pattern="[0-9]{14}"
+          maxlength="14"
+          autocomplete="off"
+          aria-describedby="ajuda-carnet"
+        />
+
+        <label for="pin">PIN</label>
+        <p class="ajuda" id="ajuda-pin">
+          4 xifres. Si no el recordeu, demaneu-lo al taulell.
+        </p>
+        <input
+          type="password"
+          id="pin"
+          required
+          inputmode="numeric"
+          pattern="[0-9]{4}"
+          maxlength="4"
+          aria-describedby="ajuda-pin"
+        />
+
+        <label for="punt-recollida">On el voleu recollir?</label>
+        <select id="punt-recollida" name="recollida" required>
+          <option value="Bib. del Turó (central)" selected>
+            Bib. del Turó (central)
+          </option>
+          <option>Bib. Ca l'Oliveres</option>
+          <option>Bib. Can Comas</option>
+          <option>Bib. Can Fabra</option>
+          <option>Bib. Can Pujades</option>
+          <option>Bib. Els Pins</option>
+          <option>Bib. Est</option>
+          <option>Bib. Font Vella</option>
+          <option>Bib. La Riera</option>
+          <option>Bib. Les Moreres</option>
+          <option>Bib. Nord</option>
+          <option>Bib. Oest</option>
+          <option>Bib. Sant Pere</option>
+          <option>Bib. Sud</option>
+          <option>Bibliobús 1</option>
+          <option>Bibliobús 2</option>
+          <option>Bibliobús 3</option>
+          <option>Punt de lectura Mercat</option>
+        </select>
+
+        <label for="data">Data de recollida</label>
+        <input type="date" id="data" name="data" required />
+
+        <fieldset>
+          <legend>Franja horària</legend>
+          <label class="opcio"
+            ><input type="radio" name="franja" value="mati" checked />
+            Matí</label
+          >
+          <label class="opcio"
+            ><input type="radio" name="franja" value="tarda" /> Tarda</label
+          >
+        </fieldset>
+
+        <label class="opcio"
+          ><input type="checkbox" name="condicions" required />
+          Accepto que, si no el recullo en 5 dies hàbils, la reserva s'anul·la.
+          <a href="ajuda.html">Condicions completes</a></label
+        >
+
+        <button type="submit" class="btn-principal">Reserva el llibre</button>
       </form>
     </main>
     <footer>

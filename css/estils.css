@@ -401,3 +401,70 @@ footer {
   outline: 3px solid #1a5fb4;
   outline-offset: 2px;
 }
+
+/* A5 · Formulari de reserva en una pàgina */
+.form-reserva {
+  background: #fff;
+  border: 1px solid var(--linia);
+  border-radius: 6px;
+  padding: 22px;
+  max-width: 560px;
+  font-family: Arial, sans-serif;
+}
+.form-reserva label {
+  display: block;
+  font-weight: 700;
+  margin: 16px 0 4px;
+}
+.form-reserva .ajuda {
+  margin: 0 0 4px;
+  font-size: 0.85rem;
+  color: #4a5358;
+}
+.form-reserva input[type="text"],
+.form-reserva input[type="password"],
+.form-reserva input[type="date"],
+.form-reserva select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #8a959b;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.form-reserva input:user-invalid {
+  border-color: #c62828;
+  background: #fff5f5;
+}
+.form-reserva fieldset {
+  border: 0;
+  padding: 0;
+  margin: 16px 0 0;
+}
+.form-reserva legend {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.form-reserva .opcio {
+  display: inline-block;
+  margin-right: 16px;
+  font-weight: 400;
+}
+.btn-principal {
+  display: inline-block;
+  margin-top: 20px;
+  background: var(--verd);
+  color: #fff;
+  border: 0;
+  padding: 14px 28px;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.llibre-triat {
+  font-family: Arial, sans-serif;
+  background: #eef6f7;
+  border-radius: 6px;
+  padding: 12px 16px;
+  max-width: 560px;
+}
