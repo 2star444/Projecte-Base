@@ -305,7 +305,7 @@ function iniciarFitxa() {
   columnaDades.appendChild(crearElement("p", "codi", "Codi: " + llibre.id));
 
   const prestec = crearElement("a", "enllac-discret", "Sol·licitar préstec");
-  prestec.href = "reserva.html";
+  prestec.href = "reserva.html?id=" + llibre.id;
   const paragrafPrestec = document.createElement("p");
   paragrafPrestec.appendChild(prestec);
   columnaDades.appendChild(paragrafPrestec);
@@ -318,124 +318,23 @@ function iniciarFitxa() {
    Sol·licitud de préstec (reserva)
    ========================================================= */
 
-/** Nombre de passos del procés de reserva (pas1 ... pas6 a l'HTML). */
-const TOTAL_PASSOS = 6;
-let pasActual = 1;
-
 /**
- * Mostra només el pas indicat i amaga la resta.
- * Cada pas és una secció amb id "pas1", "pas2"... a reserva.html.
- * @param {number} numero - Pas que es vol mostrar (1-6).
- */
-function mostrarPas(numero) {
-  for (let i = 1; i <= TOTAL_PASSOS; i++) {
-    const pas = document.getElementById("pas" + i);
-    // El segon paràmetre de toggle diu si la classe ha d'hi ser (true) o no (false)
-    pas.classList.toggle("visible", i === numero);
-  }
-  pasActual = numero;
-}
-
-/**
- * Avisa que hi ha hagut un error i torna a començar el procés.
- */
-function errorReserva() {
-  alert("Error");
-  document.getElementById("form-reserva").reset();
-  mostrarPas(1);
-}
-
-/**
- * Comprova les dades del pas actual. Si són correctes, passa al següent.
- */
-function continuarReserva() {
-  if (pasActual === 1) {
-    const carnet = document.getElementById("carnet").value;
-    const pin = document.getElementById("pin").value;
-    // Expressions regulars: ^ inici, \d dígit, {14} exactament 14 vegades, $ final
-    if (!/^\d{14}$/.test(carnet) || !/^\d{4}$/.test(pin)) {
-      errorReserva();
-      return;
-    }
-  }
-  if (
-    pasActual === 2 &&
-    !/^BD-\d{4}$/.test(document.getElementById("document").value)
-  ) {
-    errorReserva();
-    return;
-  }
-  if (pasActual === 3 && document.getElementById("biblioteca").value === "") {
-    errorReserva();
-    return;
-  }
-  if (pasActual === 4 && document.getElementById("data").value === "") {
-    errorReserva();
-    return;
-  }
-  if (pasActual === 5) {
-    if (!document.getElementById("accepto").checked) {
-      errorReserva();
-      return;
-    }
-    omplirResum();
-  }
-  mostrarPas(pasActual + 1);
-}
-
-/**
- * Escriu el resum de la sol·licitud a l'últim pas.
- */
-function omplirResum() {
-  const resum = document.getElementById("resum");
-  resum.textContent = "";
-  const linies = [
-    "Carnet: " + document.getElementById("carnet").value,
-    "Document: " + document.getElementById("document").value,
-    "Recollida: " + document.getElementById("biblioteca").value,
-  ];
-  for (const linia of linies) {
-    resum.appendChild(document.createTextNode(linia));
-    resum.appendChild(document.createElement("br"));
-  }
-}
-
-/**
- * Prepara la pàgina de reserva: omple la llista de biblioteques
- * i connecta els botons de cada pas.
+ * Mostra a la reserva el llibre triat a la fitxa (reserva.html?id=BD-0003)
+ * i en desa el codi al camp ocult del formulari: l'usuari no l'ha de recordar.
  */
 function iniciarReserva() {
-  const llista = document.getElementById("biblioteca");
-  if (!llista) {
-    return;
+  const titol = document.getElementById("llibre-reserva");
+  const campDocument = document.getElementById("document");
+  if (!titol || !campDocument) {
+    return; // no som a la pàgina de reserva
   }
-
-  // Primera opció buida i després una opció per biblioteca
-  const buida = crearElement("option", "", "--");
-  buida.value = "";
-  llista.appendChild(buida);
-  for (const biblioteca of BIBLIOTEQUES) {
-    llista.appendChild(crearElement("option", "", biblioteca));
+  const llibre = buscarLlibre(llegirParametre("id"));
+  if (llibre) {
+    titol.textContent = llibre.titol + " · " + llibre.autor;
+    campDocument.value = llibre.id;
+  } else {
+    titol.textContent = "Cap llibre triat. Tria'n un al catàleg.";
   }
-
-  // Botons «Continuar» dels passos 1 a 5 (ids continuar-1 ... continuar-5)
-  for (let i = 1; i < TOTAL_PASSOS; i++) {
-    document
-      .getElementById("continuar-" + i)
-      .addEventListener("click", continuarReserva);
-  }
-  // Per si algú prem Retorn dins d'un camp: el formulari no s'ha d'enviar sol
-  document
-    .getElementById("form-reserva")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-    });
-
-  document.getElementById("processar").addEventListener("click", function () {
-    window.location.href = "index.html";
-  });
-
-  mostrarPas(1);
 }
 
 /* =========================================================
