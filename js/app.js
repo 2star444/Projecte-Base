@@ -80,24 +80,21 @@ function iniciarMenu() {
 
 /**
  * Crea la targeta d'un llibre: portada, títol i autor.
- * En fer-hi clic, s'obre la fitxa del llibre.
+ * Tota la targeta és un enllaç a la fitxa del llibre.
  * @param {Llibre} llibre - El llibre que es mostra.
  * @returns {HTMLElement} La targeta.
  */
 function crearTargeta(llibre) {
-  const targeta = crearElement("div", "targeta");
+  const targeta = crearElement("a", "targeta");
+  targeta.href = "llibre.html?id=" + llibre.id;
 
   const portada = document.createElement("img");
   portada.src = "img/portades/" + llibre.id + ".jpg";
-  portada.alt = llibre.titol;
+  portada.alt = ""; // el títol ja és a la targeta: la imatge és decorativa
 
   targeta.appendChild(portada);
   targeta.appendChild(crearElement("h3", "", llibre.titol));
   targeta.appendChild(crearElement("p", "", llibre.autor));
-
-  targeta.addEventListener("click", function () {
-    window.location.href = "llibre.html?id=" + llibre.id;
-  });
   return targeta;
 }
 
