@@ -1,58 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ca">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Inici</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700">
-<link rel="stylesheet" href="css/estils.css">
-<script src="js/dades.js"></script>
-<script src="js/app.js"></script>
-</head>
-<body>
-<div class="capcalera">
-  <a href="index.html"><img src="img/logo.svg" alt="Biblioteca Digital del Turó"></a>
-  <div class="hamburguesa" id="obrir-menu">☰</div>
-</div>
-<nav class="menu" id="menu">
-  <ul>
-    <li><a href="index.html">Inici</a></li>
-    <li><a href="cataleg.html">OPAC</a></li>
-    <li><a href="cataleg.html">Fons</a></li>
-    <li><a href="perfil.html">Circulació</a></li>
-    <li><a href="perfil.html">El meu espai</a></li>
-  </ul>
-</nav>
-<marquee class="noticies">Horari d'hivern a partir de l'1 de desembre · Nou servei de préstec interbibliotecari · Club de lectura de tardor: places limitades</marquee>
-
-<main>
-  <div class="hero">
-    <img src="img/club-lectura.jpg" alt="">
-    <div class="text">
-      <h1>Club de lectura de tardor</h1>
-      <p>Cada dijous a les 19 h. Aquest trimestre llegim autores catalanes contemporànies.</p>
-      <a class="btn-gran" href="#">Inscriu-t'hi ara!</a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inici</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700"
+    />
+    <link rel="stylesheet" href="css/estils.css" />
+    <script src="js/dades.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+  <body>
+    <div class="capcalera">
+      <a href="index.html"
+        ><img src="img/logo.svg" alt="Biblioteca Digital del Turó"
+      /></a>
+      <button
+        type="button"
+        class="hamburguesa"
+        id="obrir-menu"
+        aria-expanded="false"
+        aria-controls="menu"
+      >
+        ☰ Menú
+      </button>
     </div>
-  </div>
+    <nav class="menu" id="menu" aria-label="Principal">
+      <ul>
+        <li><a href="index.html" aria-current="page">Inici</a></li>
+        <li><a href="cataleg.html">Catàleg</a></li>
+        <li><a href="reserva.html">Sol·licitar préstec</a></li>
+        <li><a href="perfil.html">El meu perfil</a></li>
+        <li><a href="ajuda.html">Ajuda i informació</a></li>
+      </ul>
+    </nav>
+    <marquee class="noticies">
+      Horari d'hivern a partir de l'1 de desembre · Nou servei de préstec
+      interbibliotecari · Club de lectura de tardor: places limitades
+    </marquee>
 
-  <form id="cerca" class="cerca-inici">
-    <input id="cerca" type="text" placeholder="Cerca...">
-    <button>OK</button>
-  </form>
+    <main>
+      <div class="hero">
+        <img src="img/club-lectura.jpg" alt="" />
+        <div class="text">
+          <h1>Club de lectura de tardor</h1>
+          <p>
+            Cada dijous a les 19 h. Aquest trimestre llegim autores catalanes
+            contemporànies.
+          </p>
+          <a class="btn-gran" href="#">Inscriu-t'hi ara!</a>
+        </div>
+      </div>
 
-  <h2>Novetats</h2>
-  <div class="graella" id="novetats"></div>
-  <p><a class="enllac-discret" href="cataleg.html">Consulta el catàleg complet</a></p>
-</main>
+      <form id="cerca" class="cerca-inici">
+        <input id="cerca" type="text" placeholder="Cerca..." />
+        <button>OK</button>
+      </form>
 
-<footer>
-  <center>
-    Biblioteca Digital del Turó · Plaça de la Lectura, 1 · 08000 El Turó
-    <ul>
-      <div><a href="ajuda.html">Ajuda</a></div>
-      <div><a href="#">Avís legal</a></div>
-    </ul>
-  </center>
-</footer>
-</body>
+      <h2>Novetats</h2>
+      <div class="graella" id="novetats"></div>
+      <p>
+        <a class="enllac-discret" href="cataleg.html"
+          >Consulta el catàleg complet</a
+        >
+      </p>
+    </main>
+
+    <footer>
+      <center>
+        Biblioteca Digital del Turó · Plaça de la Lectura, 1 · 08000 El Turó
+        <ul>
+          <div><a href="ajuda.html">Ajuda</a></div>
+          <div><a href="#">Avís legal</a></div>
+        </ul>
+      </center>
+    </footer>
+  </body>
 </html>

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /**
  * Biblioteca Digital del Turó · comportament de la web.
  *
@@ -63,14 +63,14 @@ function buscarLlibre(id) {
  * Obre i tanca el menú principal quan es fa clic a la icona ☰.
  */
 function iniciarMenu() {
-  const boto = document.getElementById('obrir-menu');
-  const menu = document.getElementById('menu');
+  const boto = document.getElementById("obrir-menu");
+  const menu = document.getElementById("menu");
   if (!boto || !menu) {
     return;
   }
-  boto.addEventListener('click', function () {
-    // toggle afegeix la classe si no hi és i la treu si hi és
-    menu.classList.toggle('obert');
+  boto.addEventListener("click", function () {
+    const obert = menu.classList.toggle("obert");
+    boto.setAttribute("aria-expanded", String(obert));
   });
 }
 
@@ -85,18 +85,18 @@ function iniciarMenu() {
  * @returns {HTMLElement} La targeta.
  */
 function crearTargeta(llibre) {
-  const targeta = crearElement('div', 'targeta');
+  const targeta = crearElement("div", "targeta");
 
-  const portada = document.createElement('img');
-  portada.src = 'img/portades/' + llibre.id + '.jpg';
+  const portada = document.createElement("img");
+  portada.src = "img/portades/" + llibre.id + ".jpg";
   portada.alt = llibre.titol;
 
   targeta.appendChild(portada);
-  targeta.appendChild(crearElement('h3', '', llibre.titol));
-  targeta.appendChild(crearElement('p', '', llibre.autor));
+  targeta.appendChild(crearElement("h3", "", llibre.titol));
+  targeta.appendChild(crearElement("p", "", llibre.autor));
 
-  targeta.addEventListener('click', function () {
-    window.location.href = 'llibre.html?id=' + llibre.id;
+  targeta.addEventListener("click", function () {
+    window.location.href = "llibre.html?id=" + llibre.id;
   });
   return targeta;
 }
@@ -107,7 +107,7 @@ function crearTargeta(llibre) {
  * @param {Llibre[]} llibres - Els llibres que es mostren.
  */
 function mostrarTargetes(contenidor, llibres) {
-  contenidor.textContent = ''; // buida el contenidor
+  contenidor.textContent = ""; // buida el contenidor
   for (const llibre of llibres) {
     contenidor.appendChild(crearTargeta(llibre));
   }
@@ -121,7 +121,7 @@ function mostrarTargetes(contenidor, llibres) {
  * Mostra quatre llibres a l'apartat «Novetats».
  */
 function iniciarNovetats() {
-  const novetats = document.getElementById('novetats');
+  const novetats = document.getElementById("novetats");
   if (!novetats) {
     return;
   }
@@ -133,14 +133,14 @@ function iniciarNovetats() {
  * Cercador de la pàgina d'inici: envia el text cercat al catàleg.
  */
 function iniciarCercaInici() {
-  const formulari = document.getElementById('cerca');
+  const formulari = document.getElementById("cerca");
   if (!formulari) {
     return;
   }
-  formulari.addEventListener('submit', function (event) {
+  formulari.addEventListener("submit", function (event) {
     event.preventDefault(); // evitem que el formulari recarregui la pàgina
-    const text = document.getElementById('cerca').value;
-    window.location.href = 'cataleg.html?q=' + encodeURIComponent(text);
+    const text = document.getElementById("cerca").value;
+    window.location.href = "cataleg.html?q=" + encodeURIComponent(text);
   });
 }
 
@@ -173,25 +173,29 @@ function cercarLlibres(text) {
  * Mostra la pàgina actual de resultats i els números de pàgina.
  */
 function pintarCataleg() {
-  const contenidor = document.getElementById('resultats');
-  const paginacio = document.getElementById('paginacio');
+  const contenidor = document.getElementById("resultats");
+  const paginacio = document.getElementById("paginacio");
 
   // Quins resultats toca mostrar en aquesta pàgina
   const inici = (paginaActual - 1) * LLIBRES_PER_PAGINA;
   const pagina = resultats.slice(inici, inici + LLIBRES_PER_PAGINA);
 
   if (pagina.length === 0) {
-    contenidor.textContent = '0';
+    contenidor.textContent = "0";
   } else {
     mostrarTargetes(contenidor, pagina);
   }
 
   // Números de pàgina
-  paginacio.textContent = '';
+  paginacio.textContent = "";
   const totalPagines = Math.ceil(resultats.length / LLIBRES_PER_PAGINA);
   for (let numero = 1; numero <= totalPagines; numero++) {
-    const enllac = crearElement('span', numero === paginaActual ? 'actual' : '', String(numero));
-    enllac.addEventListener('click', function () {
+    const enllac = crearElement(
+      "span",
+      numero === paginaActual ? "actual" : "",
+      String(numero),
+    );
+    enllac.addEventListener("click", function () {
       paginaActual = numero;
       pintarCataleg();
     });
@@ -204,18 +208,18 @@ function pintarCataleg() {
  * i fa funcionar el cercador de la pàgina.
  */
 function iniciarCataleg() {
-  const formulari = document.getElementById('form-opac');
-  const camp = document.getElementById('cerca-opac');
+  const formulari = document.getElementById("form-opac");
+  const camp = document.getElementById("cerca-opac");
   if (!formulari || !camp) {
     return;
   }
 
   // Cerca que arriba des de la pàgina d'inici (cataleg.html?q=...)
-  camp.value = llegirParametre('q') || '';
+  camp.value = llegirParametre("q") || "";
   resultats = cercarLlibres(camp.value);
   pintarCataleg();
 
-  formulari.addEventListener('submit', function (event) {
+  formulari.addEventListener("submit", function (event) {
     event.preventDefault();
     resultats = cercarLlibres(camp.value);
     paginaActual = 1;
@@ -233,51 +237,76 @@ function iniciarCataleg() {
  * @returns {string} Les estrelles.
  */
 function estrelles(valoracio) {
-  return '★'.repeat(valoracio) + '☆'.repeat(5 - valoracio);
+  return "★".repeat(valoracio) + "☆".repeat(5 - valoracio);
 }
 
 /**
  * Omple la fitxa amb les dades del llibre que indica l'adreça (llibre.html?id=...).
  */
 function iniciarFitxa() {
-  const fitxa = document.getElementById('fitxa');
+  const fitxa = document.getElementById("fitxa");
   if (!fitxa) {
     return;
   }
   // Si l'adreça no porta cap id vàlid, mostrem «Jo confesso»
-  const llibre = buscarLlibre(llegirParametre('id')) || buscarLlibre('BD-0003');
+  const llibre = buscarLlibre(llegirParametre("id")) || buscarLlibre("BD-0003");
 
   // Columna esquerra: portada
-  const columnaPortada = document.createElement('div');
-  const portada = document.createElement('img');
-  portada.src = 'img/portades/' + llibre.id + '.jpg';
-  portada.alt = 'Portada';
+  const columnaPortada = document.createElement("div");
+  const portada = document.createElement("img");
+  portada.src = "img/portades/" + llibre.id + ".jpg";
+  portada.alt = "Portada";
   columnaPortada.appendChild(portada);
 
   // Columna dreta: dades del llibre
-  const columnaDades = document.createElement('div');
-  columnaDades.appendChild(crearElement('h1', '', llibre.titol));
-  columnaDades.appendChild(crearElement('p', '', llibre.autor + ' · ' + llibre.any + ' · ' + llibre.genere));
+  const columnaDades = document.createElement("div");
+  columnaDades.appendChild(crearElement("h1", "", llibre.titol));
+  columnaDades.appendChild(
+    crearElement(
+      "p",
+      "",
+      llibre.autor + " · " + llibre.any + " · " + llibre.genere,
+    ),
+  );
 
-  const disponibilitat = document.createElement('p');
-  disponibilitat.appendChild(crearElement('span', llibre.disponible ? 'punt si' : 'punt no'));
+  const disponibilitat = document.createElement("p");
+  disponibilitat.appendChild(
+    crearElement("span", llibre.disponible ? "punt si" : "punt no"),
+  );
   columnaDades.appendChild(disponibilitat);
 
-  columnaDades.appendChild(crearElement('p', 'estrelles', estrelles(llibre.valoracio)));
-  columnaDades.appendChild(crearElement('h2', '', 'Resum'));
-  columnaDades.appendChild(crearElement('p', '', llibre.resum));
-  columnaDades.appendChild(crearElement('p', '', llibre.resum + ' Edició revisada amb pròleg i notes. Inclou una cronologia de l\'autor i una selecció de crítiques publicades en el moment de la primera edició.'));
+  columnaDades.appendChild(
+    crearElement("p", "estrelles", estrelles(llibre.valoracio)),
+  );
+  columnaDades.appendChild(crearElement("h2", "", "Resum"));
+  columnaDades.appendChild(crearElement("p", "", llibre.resum));
+  columnaDades.appendChild(
+    crearElement(
+      "p",
+      "",
+      llibre.resum +
+        " Edició revisada amb pròleg i notes. Inclou una cronologia de l'autor i una selecció de crítiques publicades en el moment de la primera edició.",
+    ),
+  );
 
-  const botons = document.createElement('p');
-  botons.appendChild(crearElement('button', 'btn-compartir', 'Compartir a les xarxes'));
-  botons.appendChild(crearElement('button', 'btn-compartir btn-desitjos', 'Afegir a llista de desitjos'));
+  const botons = document.createElement("p");
+  botons.appendChild(
+    crearElement("button", "btn-compartir", "Compartir a les xarxes"),
+  );
+  botons.appendChild(
+    crearElement(
+      "button",
+      "btn-compartir btn-desitjos",
+      "Afegir a llista de desitjos",
+    ),
+  );
   columnaDades.appendChild(botons);
 
-  columnaDades.appendChild(crearElement('p', 'codi', 'Codi: ' + llibre.id));
+  columnaDades.appendChild(crearElement("p", "codi", "Codi: " + llibre.id));
 
-  const prestec = crearElement('a', 'enllac-discret', 'Sol·licitar préstec');
-  prestec.href = 'reserva.html';
-  const paragrafPrestec = document.createElement('p');
+  const prestec = crearElement("a", "enllac-discret", "Sol·licitar préstec");
+  prestec.href = "reserva.html";
+  const paragrafPrestec = document.createElement("p");
   paragrafPrestec.appendChild(prestec);
   columnaDades.appendChild(paragrafPrestec);
 
@@ -300,9 +329,9 @@ let pasActual = 1;
  */
 function mostrarPas(numero) {
   for (let i = 1; i <= TOTAL_PASSOS; i++) {
-    const pas = document.getElementById('pas' + i);
+    const pas = document.getElementById("pas" + i);
     // El segon paràmetre de toggle diu si la classe ha d'hi ser (true) o no (false)
-    pas.classList.toggle('visible', i === numero);
+    pas.classList.toggle("visible", i === numero);
   }
   pasActual = numero;
 }
@@ -311,8 +340,8 @@ function mostrarPas(numero) {
  * Avisa que hi ha hagut un error i torna a començar el procés.
  */
 function errorReserva() {
-  alert('Error');
-  document.getElementById('form-reserva').reset();
+  alert("Error");
+  document.getElementById("form-reserva").reset();
   mostrarPas(1);
 }
 
@@ -321,28 +350,31 @@ function errorReserva() {
  */
 function continuarReserva() {
   if (pasActual === 1) {
-    const carnet = document.getElementById('carnet').value;
-    const pin = document.getElementById('pin').value;
+    const carnet = document.getElementById("carnet").value;
+    const pin = document.getElementById("pin").value;
     // Expressions regulars: ^ inici, \d dígit, {14} exactament 14 vegades, $ final
     if (!/^\d{14}$/.test(carnet) || !/^\d{4}$/.test(pin)) {
       errorReserva();
       return;
     }
   }
-  if (pasActual === 2 && !/^BD-\d{4}$/.test(document.getElementById('document').value)) {
+  if (
+    pasActual === 2 &&
+    !/^BD-\d{4}$/.test(document.getElementById("document").value)
+  ) {
     errorReserva();
     return;
   }
-  if (pasActual === 3 && document.getElementById('biblioteca').value === '') {
+  if (pasActual === 3 && document.getElementById("biblioteca").value === "") {
     errorReserva();
     return;
   }
-  if (pasActual === 4 && document.getElementById('data').value === '') {
+  if (pasActual === 4 && document.getElementById("data").value === "") {
     errorReserva();
     return;
   }
   if (pasActual === 5) {
-    if (!document.getElementById('accepto').checked) {
+    if (!document.getElementById("accepto").checked) {
       errorReserva();
       return;
     }
@@ -355,16 +387,16 @@ function continuarReserva() {
  * Escriu el resum de la sol·licitud a l'últim pas.
  */
 function omplirResum() {
-  const resum = document.getElementById('resum');
-  resum.textContent = '';
+  const resum = document.getElementById("resum");
+  resum.textContent = "";
   const linies = [
-    'Carnet: ' + document.getElementById('carnet').value,
-    'Document: ' + document.getElementById('document').value,
-    'Recollida: ' + document.getElementById('biblioteca').value
+    "Carnet: " + document.getElementById("carnet").value,
+    "Document: " + document.getElementById("document").value,
+    "Recollida: " + document.getElementById("biblioteca").value,
   ];
   for (const linia of linies) {
     resum.appendChild(document.createTextNode(linia));
-    resum.appendChild(document.createElement('br'));
+    resum.appendChild(document.createElement("br"));
   }
 }
 
@@ -373,30 +405,34 @@ function omplirResum() {
  * i connecta els botons de cada pas.
  */
 function iniciarReserva() {
-  const llista = document.getElementById('biblioteca');
+  const llista = document.getElementById("biblioteca");
   if (!llista) {
     return;
   }
 
   // Primera opció buida i després una opció per biblioteca
-  const buida = crearElement('option', '', '--');
-  buida.value = '';
+  const buida = crearElement("option", "", "--");
+  buida.value = "";
   llista.appendChild(buida);
   for (const biblioteca of BIBLIOTEQUES) {
-    llista.appendChild(crearElement('option', '', biblioteca));
+    llista.appendChild(crearElement("option", "", biblioteca));
   }
 
   // Botons «Continuar» dels passos 1 a 5 (ids continuar-1 ... continuar-5)
   for (let i = 1; i < TOTAL_PASSOS; i++) {
-    document.getElementById('continuar-' + i).addEventListener('click', continuarReserva);
+    document
+      .getElementById("continuar-" + i)
+      .addEventListener("click", continuarReserva);
   }
   // Per si algú prem Retorn dins d'un camp: el formulari no s'ha d'enviar sol
-  document.getElementById('form-reserva').addEventListener('submit', function (event) {
-    event.preventDefault();
-  });
+  document
+    .getElementById("form-reserva")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+    });
 
-  document.getElementById('processar').addEventListener('click', function () {
-    window.location.href = 'index.html';
+  document.getElementById("processar").addEventListener("click", function () {
+    window.location.href = "index.html";
   });
 
   mostrarPas(1);
@@ -411,20 +447,29 @@ function iniciarReserva() {
  * Cada preferència activa o desactiva una classe al <body> (vegeu estils.css).
  */
 function aplicarPreferencies() {
-  document.body.classList.toggle('lletra-gran', document.getElementById('pref-lletra').checked);
-  document.body.classList.toggle('contrast', document.getElementById('pref-contrast').checked);
-  document.body.classList.toggle('fosc', document.getElementById('pref-fosc').checked);
+  document.body.classList.toggle(
+    "lletra-gran",
+    document.getElementById("pref-lletra").checked,
+  );
+  document.body.classList.toggle(
+    "contrast",
+    document.getElementById("pref-contrast").checked,
+  );
+  document.body.classList.toggle(
+    "fosc",
+    document.getElementById("pref-fosc").checked,
+  );
 }
 
 /**
  * Connecta el botó de les preferències de lectura.
  */
 function iniciarPerfil() {
-  const boto = document.getElementById('aplicar-preferencies');
+  const boto = document.getElementById("aplicar-preferencies");
   if (!boto) {
     return;
   }
-  boto.addEventListener('click', aplicarPreferencies);
+  boto.addEventListener("click", aplicarPreferencies);
 }
 
 /* =========================================================
@@ -432,7 +477,7 @@ function iniciarPerfil() {
    ========================================================= */
 
 // DOMContentLoaded: l'HTML ja s'ha llegit i ja podem buscar elements per id
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
   iniciarMenu();
   iniciarNovetats();
   iniciarCercaInici();
