@@ -153,19 +153,35 @@ let resultats = [];
 let paginaActual = 1;
 
 /**
- * Cerca llibres que continguin el text dins del títol.
+ * Prepara un text per comparar-lo: minúscules i sense accents.
+ * @param {string} text - Text original.
+ * @returns {string} Text en minúscules i sense accents.
+ */
+function normalitzar(text) {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+/**
+ * Cerca llibres pel títol o per l'autor, sense distingir majúscules ni accents.
  * @param {string} text - Text cercat.
  * @returns {Llibre[]} Els llibres trobats (tots, si el text és buit).
  */
 function cercarLlibres(text) {
-  if (!text) {
-    return LLIBRES.slice(); // una còpia de tota la llista
+  const cercat = normalitzar(text || "");
+  if (cercat === "") {
+    return LLIBRES.slice();
   }
   return LLIBRES.filter(function (llibre) {
-    return llibre.titol.includes(text);
+    return (
+      normalitzar(llibre.titol).includes(cercat) ||
+      normalitzar(llibre.autor).includes(cercat)
+    );
   });
 }
-
 /**
  * Mostra la pàgina actual de resultats i els números de pàgina.
  */
