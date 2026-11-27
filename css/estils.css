@@ -495,3 +495,8 @@ a.targeta {
   color: inherit;
   text-decoration: none;
 }
+
+/* Contrast alt del focus dins del menú fosc */
+.menu :focus-visible {
+  outline-color: var(--ocre);
+}
