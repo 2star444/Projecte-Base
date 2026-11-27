@@ -136,7 +136,7 @@ function iniciarCercaInici() {
   }
   formulari.addEventListener("submit", function (event) {
     event.preventDefault(); // evitem que el formulari recarregui la pàgina
-    const text = document.getElementById("cerca").value;
+    const text = document.getElementById("camp-cerca").value;
     window.location.href = "cataleg.html?q=" + encodeURIComponent(text);
   });
 }
@@ -350,6 +350,27 @@ function iniciarReserva() {
   }
 }
 
+/**
+ * A la pàgina de confirmació, mostra el llibre i el lloc de recollida
+ * que arriben a l'adreça (el formulari s'envia amb method="get").
+ */
+function iniciarConfirmacio() {
+  const detall = document.getElementById("detall-reserva");
+  if (!detall) {
+    return; // no som a la pàgina de confirmació
+  }
+  const llibre = buscarLlibre(llegirParametre("document"));
+  const lloc = llegirParametre("recollida");
+  if (llibre && lloc) {
+    detall.textContent =
+      "«" +
+      llibre.titol +
+      "» t'esperarà a " +
+      lloc +
+      " durant 5 dies hàbils a partir de la data triada.";
+  }
+}
+
 /* =========================================================
    El meu espai (perfil)
    ========================================================= */
@@ -396,5 +417,6 @@ document.addEventListener("DOMContentLoaded", function () {
   iniciarCataleg();
   iniciarFitxa();
   iniciarReserva();
+  iniciarConfirmacio();
   iniciarPerfil();
 });
